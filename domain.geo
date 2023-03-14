@@ -6,6 +6,15 @@ R2 = 0.01;
 lc = R2/10;
 Lc = 0.1;
 
+// Creation of a ellipsoid 
+// Note: in gmsh the ellipse function is poorly coded. One can only define arcs with angles less than Pi
+// The workaround is to define more points using the parametric description for ellipses:
+//        x = R1 * Cos(t)
+//        y = R2 * Sin(t)
+// x,y are the coordinates of any point on the ellipse,
+// t is the parameter, which ranges from 0 to 2Pi radians.
+//
+
 Point(1) = { 0.0, 0.0, 0.0, lc};
 Point(2) = { R1 * Cos(0), R2 * Sin(0), 0.0, lc };
 Point(3) = { R1 * Cos(Pi/2), R2 * Sin(Pi/2), 0.0, lc };
@@ -15,6 +24,8 @@ Point(7) = { R1 * Cos(5*Pi/6), R2 * Sin(5*Pi/6), 0.0, lc };
 Point(5) = { R1 * Cos(-Pi/2), R2 * Sin(-Pi/2), 0.0, lc };
 Point(8) = { R1 * Cos(-5*Pi/6), R2 * Sin(-5*Pi/6), 0.0, lc };
 Point(9) = { R1 * Cos(-Pi/6), R2 * Sin(-Pi/6), 0.0, lc };
+
+// Ellipse (*) = {initial point, center of ellipse, any point in major axis, end point};
 
 Ellipse(1) = { 2, 1, 2, 6 };
 Ellipse(2) = { 6, 1, 2, 3 };
